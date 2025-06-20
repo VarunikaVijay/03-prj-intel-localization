@@ -1,0 +1,219 @@
+/* Add your CSS here */
+
+/* Style the header section */
+header {
+  /* Gradient background from left (#5280d7) to right (#334397) */
+  background: linear-gradient(to right, #5280d7, #334397);
+  text-align: center; /* Center all text in the header */
+  padding: 40px 20px 30px 20px; /* Add space inside the header */
+  color: white; /* Make text white for contrast */
+  font-family: 'Montserrat', Arial, sans-serif; /* Use Montserrat font */
+}
+
+/* Style for the Intel logo image */
+.intel-logo {
+  width: 120px; /* Set a reasonable width for the logo */
+  margin-bottom: 16px; /* Space below the logo */
+}
+
+/* Style for the divider under the h1 */
+.header-divider {
+  width: 60px; /* Make the divider short */
+  height: 4px; /* Make the divider thin */
+  background-color: #00aee6; /* Intel "i" dot color */
+  margin: 16px auto; /* Space above and below, center horizontally */
+  border: none; /* Remove default border */
+  border-radius: 2px; /* Slightly round the edges */
+}
+
+/* Make all letters in the header h1 uppercase */
+header h1 {
+  text-transform: uppercase; /* Capitalize all letters */
+}
+
+/* Make the header paragraph text not bold */
+header p {
+  font-weight: normal; /* Remove bold style */
+  margin-bottom: 0;
+}
+
+/* Card container style */
+.card {
+  background: white; /* Card background */
+  border: 1px solid #e0e0e0; /* Light border */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Soft shadow */
+  padding: 16px; /* Space inside card */
+  margin: 20px auto; /* Space around card */
+  max-width: 320px; /* Limit card width */
+  position: relative; /* Needed for overlay */
+  overflow: hidden; /* Hide overlay outside card */
+  transition: 
+    transform 0.2s ease,      /* Smoothly scale the card */
+    box-shadow 0.2s ease;     /* Smoothly change the shadow */
+  font-family: 'Montserrat', Arial, sans-serif; /* Match header font */
+}
+
+/* Date at the top of the card */
+.card-date {
+  color: #334397; /* Dark blue */
+  font-size: 1rem; /* Normal size */
+  font-weight: bold; /* Make it stand out */
+  margin-bottom: 8px; /* Space below date */
+}
+
+/* h3 styling inside card */
+.card h3 {
+  color: black; /* Black text */
+  font-size: 1.1rem; /* Smaller than default */
+  margin: 0 0 8px 0; /* Space below h3 */
+  font-weight: normal; /* Not bold */
+}
+
+/* Image styling inside card */
+.card img {
+  width: 100%; /* Make image fit card */
+  border-radius: 6px; /* Rounded image corners */
+  margin-bottom: 12px; /* Space below image */
+}
+
+/* Card paragraph styling */
+.card p {
+  color: #333; /* Default dark text */
+  margin: 0; /* Remove default margin */
+  position: absolute; /* Position absolutely inside the card */
+  top: 0; /* Start at the top */
+  left: 0; /* Start at the left */
+  width: 100%; /* Take full width */
+  padding: 16px; /* Add some padding */
+  box-sizing: border-box; /* Include padding in width */
+  z-index: 2; /* Show above overlay */
+  background: none; /* No background by default */
+  transition: color 0.2s;
+  display: none; /* Hide the paragraph by default */
+  font-family: 'Montserrat', Arial, sans-serif; /* Match header p font */
+}
+
+/* Show the paragraph only when hovering over the card */
+.card:hover p {
+  display: block; /* Show the paragraph on hover */
+  color: white;   /* Make text white on hover */
+  /* Optionally, you can add a transparent background for readability: */
+  /* background: rgba(51, 67, 151, 0.7); */
+}
+
+/* When you hover over a card, make it pop out a bit */
+.card:hover {
+  /* Slightly enlarge the card */
+  transform: scale(1.04);
+  /* Add a stronger shadow for a "lifted" look */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18), 0 1.5px 6px rgba(0,0,0,0.10);
+  /* Optionally, bring the card above others */
+  z-index: 2;
+}
+
+/* Overlay for card hover effect */
+.card-hover-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to bottom right, #334397 80%, #5280d7 100%);
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.3s;
+  z-index: 1; /* Below text */
+  pointer-events: none; /* Let mouse events pass through */
+  border-radius: 8px; /* Match card corners if needed */
+}
+
+/* Show overlay and change p color on hover */
+.card:hover .card-hover-overlay {
+  opacity: 1; /* Show overlay */
+}
+
+/* Wrapper for horizontal scrolling and snap */
+.timeline-scroll {
+  /* Allow horizontal scrolling */
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* Show only 4 cards at a time (4 x 320px + 3 x 16px gap = 1312px) */
+  width: 1470px;
+  /* Enable snap scrolling for children */
+  scroll-snap-type: x mandatory;
+  padding-bottom: 16px;
+  /* Center the timeline on the page */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Timeline container: cards in a row */
+.timeline {
+  display: flex;           /* Place cards in a row */
+  flex-direction: row;
+  gap: 16px;               /* Space between cards */
+  width: max-content;      /* Only as wide as needed for cards */
+}
+
+/* Each card will snap into place */
+.card {
+  scroll-snap-align: start; /* Snap card to the start of the scroll area */
+  min-width: 320px;         /* Set card width (match your card size) */
+  max-width: 320px;
+  /* ...existing card styles... */
+}
+
+/* Responsive: stack cards vertically on small screens */
+@media (max-width: 700px) {
+  .timeline {
+    flex-direction: column; /* Stack cards vertically */
+    overflow-x: unset;      /* No horizontal scroll */
+    overflow-y: auto;       /* Enable vertical scroll if needed */
+    gap: 20px;
+  }
+  .timeline .card {
+    width: 100%;        /* Cards take full width */
+    max-width: 100%;    /* Prevent max-width from limiting card */
+    box-sizing: border-box; /* Include padding and border in width */
+    margin-left: 0;     /* Remove auto margin for horizontal centering */
+    margin-right: 0;
+  }
+  /* Make card images taller on small screens */
+  .card img {
+    height: 200px;         /* Make image taller */
+    object-fit: cover;     /* Crop image to fill area */
+    margin-bottom: 12px;   /* Keep consistent spacing */
+  }
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 900px) {
+  /* Make the header stretch across the screen */
+  header {
+    width: 100%;
+    box-sizing: border-box; /* Include padding in width */
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  /* Timeline scroll area uses full width */
+  .timeline-scroll {
+    width: 100%;
+    /* Remove fixed width, allow it to fill the screen */
+    min-width: 0;
+    margin-left: 0;
+    margin-right: 0;
+    /* Center the timeline inside */
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Center the timeline cards */
+  .timeline {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Make all p tags that are direct children of body use the header font */
+body > p {
+  font-family: 'Montserrat', Arial, sans-serif;
+  text-align: center;
+}

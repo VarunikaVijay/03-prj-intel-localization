@@ -45,19 +45,25 @@ header p {
   box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Soft shadow */
   padding: 16px; /* Space inside card */
   margin: 20px auto; /* Space around card */
-  max-width: 320px; /* Limit card width */
+  width: 320px;      /* Match the first card's width */
+  min-width: 320px;
+  max-width: 320px;
+  height: 420px;     /* Match the first card's height */
   position: relative; /* Needed for overlay */
   overflow: hidden; /* Hide overlay outside card */
   transition: 
     transform 0.2s ease,      /* Smoothly scale the card */
     box-shadow 0.2s ease;     /* Smoothly change the shadow */
   font-family: 'Montserrat', Arial, sans-serif; /* Match header font */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 /* Date at the top of the card */
 .card-date {
   color: #334397; /* Dark blue */
-  font-size: 1rem; /* Normal size */
+  font-size: 1.4rem; /* Larger size for the date */
   font-weight: bold; /* Make it stand out */
   margin-bottom: 8px; /* Space below date */
 }
@@ -65,16 +71,20 @@ header p {
 /* h3 styling inside card */
 .card h3 {
   color: black; /* Black text */
-  font-size: 1.1rem; /* Smaller than default */
+  font-size: 1.5rem; /* Further increased size for card titles */
   margin: 0 0 8px 0; /* Space below h3 */
   font-weight: normal; /* Not bold */
 }
 
 /* Image styling inside card */
 .card img {
-  width: 100%; /* Make image fit card */
-  border-radius: 6px; /* Rounded image corners */
+  width: 100%;        /* Make image fit inside the card, including padding */
+  height: 128px;      /* Fixed height for all images */
+  object-fit: cover;  /* Crop image to fill area */
+  border-radius: 6px;
   margin-bottom: 12px; /* Space below image */
+  margin-left: auto;   /* Center image horizontally (optional with width 100%) */
+  margin-right: auto;  /* Center image horizontally (optional with width 100%) */
 }
 
 /* Card paragraph styling */
@@ -134,8 +144,9 @@ header p {
   /* Allow horizontal scrolling */
   overflow-x: auto;
   overflow-y: hidden;
-  /* Show only 4 cards at a time (4 x 320px + 3 x 16px gap = 1312px) */
-  width: 1470px;
+  /* Show only 4 cards at a time (4 x 320px + 3 x 16px gap = 1328px) */
+  max-width: 1328px; /* Limit viewport to 4 cards */
+  width: 100%;
   /* Enable snap scrolling for children */
   scroll-snap-type: x mandatory;
   padding-bottom: 16px;
@@ -155,8 +166,10 @@ header p {
 /* Each card will snap into place */
 .card {
   scroll-snap-align: start; /* Snap card to the start of the scroll area */
-  min-width: 320px;         /* Set card width (match your card size) */
+  width: 320px;      /* Match the first card's width */
+  min-width: 320px;
   max-width: 320px;
+  height: 420px;     /* Match the first card's height */
   /* ...existing card styles... */
 }
 
@@ -180,6 +193,14 @@ header p {
     height: 200px;         /* Make image taller */
     object-fit: cover;     /* Crop image to fill area */
     margin-bottom: 12px;   /* Keep consistent spacing */
+  }
+
+  /* Add space between stacked columns in the 3-column section on small screens */
+  .three-column-bg .col-md-4 {
+    margin-bottom: 24px; /* Add space between columns */
+  }
+  .three-column-bg .col-md-4:last-child {
+    margin-bottom: 0; /* No extra space after the last column */
   }
 }
 
@@ -212,8 +233,41 @@ header p {
   }
 }
 
+/* Use a clear, readable Arabic-friendly font and increase base font size */
+body, section, section h2, section p, section a, section input, section button {
+  font-family: 'Tajawal', 'Cairo', 'Amiri', 'Arial', sans-serif;
+  font-size: 1.15rem; /* Increase base font size for readability */
+}
+
 /* Make all p tags that are direct children of body use the header font */
 body > p {
   font-family: 'Montserrat', Arial, sans-serif;
   text-align: center;
+}
+
+/* Light gray background for the 3-column section */
+.three-column-bg {
+  background-color: #f8f9fa; /* Very light gray */
+  padding-top: 32px;  /* Add some space at the top */
+  padding-bottom: 32px; /* Add some space at the bottom */
+}
+
+/* Make section headers larger and bold for readability */
+section h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/* Make all paragraph text larger for readability */
+p {
+  font-size: 1.25rem;
+}
+
+/* Make footer links use the site's dark blue color */
+footer a {
+  color: #334397; /* Dark blue */
+  text-decoration: none; /* Remove underline for a cleaner look */
+}
+footer a:hover {
+  text-decoration: underline; /* Underline on hover for clarity */
 }
